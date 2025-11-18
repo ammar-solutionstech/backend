@@ -1,0 +1,151 @@
+-- Core role permissions
+insert into public."Permission"(name,module) values
+ ('Create Role','Basic'),
+ ('View Role','Basic'),
+ ('Update Role','Basic'),
+ ('Delete Role','Basic'),
+ ('View All Role','Basic'),
+ ('Add Permission To Role','Basic'),
+ ('Remove Permission From Role','Basic'),
+ ('List All Permissions In Role','Basic'),
+ ('List All Roles Have Permission','Basic')
+ ON CONFLICT (name,module) DO NOTHING;
+
+-- Inventory domain
+insert into public."Permission"(name,module) values
+ ('View Brands','Inventory'),
+ ('View Brand','Inventory'),
+ ('Create Brand','Inventory'),
+ ('Update Brand','Inventory'),
+ ('Delete Brand','Inventory'),
+ ('View Models','Inventory'),
+ ('View Model','Inventory'),
+ ('Create Model','Inventory'),
+ ('Update Model','Inventory'),
+ ('Delete Model','Inventory'),
+ ('View Equipment Types','Inventory'),
+ ('View Equipment Type','Inventory'),
+ ('Create Equipment Type','Inventory'),
+ ('Update Equipment Type','Inventory'),
+ ('Delete Equipment Type','Inventory'),
+ ('View Operating Systems','Inventory'),
+ ('View Operating System','Inventory'),
+ ('Create Operating System','Inventory'),
+ ('Update Operating System','Inventory'),
+ ('Delete Operating System','Inventory'),
+ ('View Software Categories','Inventory'),
+ ('View Software Category','Inventory'),
+ ('Create Software Category','Inventory'),
+ ('Update Software Category','Inventory'),
+ ('Delete Software Category','Inventory'),
+ ('View Software','Inventory'),
+ ('Create Software','Inventory'),
+ ('Update Software','Inventory'),
+ ('Delete Software','Inventory'),
+ ('View Equipment','Inventory'),
+ ('Create Equipment','Inventory'),
+ ('Update Equipment','Inventory'),
+ ('Delete Equipment','Inventory'),
+ ('View Documents','Inventory'),
+ ('Create Document','Inventory'),
+ ('Update Document','Inventory'),
+ ('Delete Document','Inventory'),
+ ('View Equipment Software','Inventory'),
+ ('Link Software To Equipment','Inventory'),
+ ('Update Equipment Software','Inventory'),
+ ('Unlink Software From Equipment','Inventory'),
+ ('View Equipment Help Desk Links','Inventory'),
+ ('Link Equipment To Help Desk','Inventory'),
+ ('Unlink Equipment From Help Desk','Inventory'),
+ ('View Equipment User History','Inventory'),
+ ('Create Equipment User History','Inventory'),
+ ('Update Equipment User History','Inventory'),
+ ('Delete Equipment User History','Inventory')
+ON CONFLICT (name,module) DO NOTHING;
+
+-- Maintenance
+insert into public."Permission"(name,module) values
+ ('View Maintenance Records','Maintenance'),
+ ('View Maintenance Record','Maintenance'),
+ ('Create Maintenance Record','Maintenance'),
+ ('Update Maintenance Record','Maintenance'),
+ ('Delete Maintenance Record','Maintenance')
+  ON CONFLICT (name,module) DO NOTHING;
+
+-- Directory / geography
+insert into public."Permission"(name,module) values
+ ('View Countries','Directory'),
+ ('View Country','Directory'),
+ ('Create Country','Directory'),
+ ('Update Country','Directory'),
+ ('Delete Country','Directory'),
+ ('View Cities','Directory'),
+ ('View City','Directory'),
+ ('Create City','Directory'),
+ ('Update City','Directory'),
+ ('Delete City','Directory'),
+ ('View Locations','Directory'),
+ ('View Location','Directory'),
+ ('Create Location','Directory'),
+ ('Update Location','Directory'),
+ ('Delete Location','Directory'),
+ ('View Contacts','Directory'),
+ ('View Contact','Directory'),
+ ('Create Contact','Directory'),
+ ('Update Contact','Directory'),
+ ('Delete Contact','Directory')
+  ON CONFLICT (name,module) DO NOTHING;
+
+-- Help desk domain
+insert into public."Permission"(name,module) values
+ ('View Help Desk Tickets','Help Desk'),
+ ('View Help Desk Ticket','Help Desk'),
+ ('Create Help Desk Ticket','Help Desk'),
+ ('Update Help Desk Ticket','Help Desk'),
+ ('Delete Help Desk Ticket','Help Desk'),
+ ('View Help Desk Ratings','Help Desk'),
+ ('View Help Desk Rating','Help Desk'),
+ ('Create Help Desk Rating','Help Desk'),
+ ('Update Help Desk Rating','Help Desk'),
+ ('Delete Help Desk Rating','Help Desk'),
+ ('View Help Desk Transactions','Help Desk'),
+ ('View Help Desk Transaction','Help Desk'),
+ ('Create Help Desk Transaction','Help Desk'),
+ ('Update Help Desk Transaction','Help Desk'),
+ ('Delete Help Desk Transaction','Help Desk'),
+ ('View Help Desk Teams','Help Desk'),
+ ('View Help Desk Team','Help Desk'),
+ ('Create Help Desk Team','Help Desk'),
+ ('Update Help Desk Team','Help Desk'),
+ ('Delete Help Desk Team','Help Desk'),
+ ('View Help Desk Transaction Types','Help Desk'),
+ ('View Help Desk Transaction Type','Help Desk'),
+ ('Create Help Desk Transaction Type','Help Desk'),
+ ('Update Help Desk Transaction Type','Help Desk'),
+ ('Delete Help Desk Transaction Type','Help Desk'),
+ ('View Team Members','Help Desk'),
+ ('Add Team Member','Help Desk'),
+ ('Remove Team Member','Help Desk'),
+ ('View Help Desk Participants','Help Desk'),
+ ('Add Help Desk Participant','Help Desk'),
+ ('Remove Help Desk Participant','Help Desk'),
+ ('View Transaction Users','Help Desk'),
+ ('Add Transaction User','Help Desk'),
+ ('Remove Transaction User','Help Desk'),
+ ('View Help Desk Types','Help Desk'),
+ ('Create Help Desk Type','Help Desk'),
+ ('Update Help Desk Type','Help Desk'),
+ ('Delete Help Desk Type','Help Desk')
+  ON CONFLICT (name,module) DO NOTHING;
+
+-- Navigation
+insert into public."Permission"(name,module) values
+ ('View Menus','Navigation'),
+ ('View Menu','Navigation'),
+ ('Create Menu','Navigation'),
+ ('Update Menu','Navigation'),
+ ('Delete Menu','Navigation'),
+ ('View Menu Roles','Navigation'),
+ ('Add Menu Role','Navigation'),
+ ('Remove Menu Role','Navigation')
+  ON CONFLICT (name,module) DO NOTHING;

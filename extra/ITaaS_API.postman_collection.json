@@ -1,0 +1,5719 @@
+{
+  "info": {
+    "_postman_id": "itaas-api-collection-v2",
+    "name": "ITaaS API - Complete Collection",
+    "description": "Complete API collection for ITaaS (IT as a Service) with all 147 endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Public",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"user@example.com\",\"password\":\"password123\"}"
+            },
+            "url": {
+              "raw": "{{base_url}}/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "login"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.environment.set(\"token\", jsonData.token);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/health",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "health"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Admin Only",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/admin",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Permissions",
+      "item": [
+        {
+          "name": "List All Permissions",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/permissions",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "permissions"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Permission by ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/permissions/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "permissions",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "type": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Permission",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\":\"New Permission\",\"module\":\"Basic\"}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/permissions",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "permissions"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Permission",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\":\"Updated Permission\",\"module\":\"Basic\"}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/permissions/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "permissions",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "type": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Permission",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/api/permissions/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "permissions",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "type": ""
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Roles",
+      "item": [
+        {
+          "name": "List All Roles",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/roles",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "roles"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Role by ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/roles/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "roles",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "type": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Role",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\":\"manager\",\"description\":\"Manager role\"}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/roles",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "roles"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Role",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\":\"senior_manager\",\"description\":\"Senior manager role\"}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/roles/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "roles",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "type": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Role",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/api/roles/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "roles",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "type": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Role Permissions",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[1,2,3,4,5]"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/roles/:id/permissions",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "roles",
+                ":id",
+                "permissions"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "type": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Add Permission to Role",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":6}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/roles/:id/permission",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "roles",
+                ":id",
+                "permission"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "type": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Permission from Role",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":6}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/roles/:id/permission",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "roles",
+                ":id",
+                "permission"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "type": ""
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "List All Users",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/users",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "users"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get User by ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/users/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "type": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create User",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"first_name\":\"Jane\",\"latest_name\":\"Smith\",\"father_name\":\"Robert\",\"work_email\":\"jane.smith@company.com\",\"password\":\"password123\"}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/users",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "users"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"work_email\":\"new.email@company.com\"}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/users/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "type": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/api/users/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "type": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Suspend User",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"active\":\"yes\"}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/users/:id/suspend",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                ":id",
+                "suspend"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "type": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update User Permissions",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[1,2,3,5]"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/users/:id/permissions",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                ":id",
+                "permissions"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "type": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Add Permission to User",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":4}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/users/:id/permissions",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                ":id",
+                "permissions"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "type": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Permission from User",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":4}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/users/:id/permissions",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                ":id",
+                "permissions"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "type": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update User Roles",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[1,2]"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/users/:id/roles",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                ":id",
+                "roles"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "type": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Add Role to User",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":3}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/users/:id/roles",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                ":id",
+                "roles"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "type": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Role from User",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":3}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/users/:id/roles",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                ":id",
+                "roles"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "type": ""
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Help Desk Types",
+      "item": [
+        {
+          "name": "List All Help Desk Types",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/help-desk-types",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "help-desk-types"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Help Desk Type by ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/help-desk-types/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "help-desk-types",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "type": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Help Desk Type",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\":\"Software Issue\",\"description\":\"Software-related problems\",\"team_id\":1,\"is_active\":true}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/help-desk-types",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "help-desk-types"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Help Desk Type",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\":\"Updated Type\",\"is_active\":false}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/help-desk-types/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "help-desk-types",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "type": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Help Desk Type",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/api/help-desk-types/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "help-desk-types",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "type": ""
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Inventory",
+      "item": [
+        {
+          "name": "Brands",
+          "item": [
+            {
+              "name": "List Brands",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/brands",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "brands"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Brand",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/brands/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "brands",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create Brand",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"Lenovo\"}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/brands",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "brands"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Brand",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"Lenovo\"}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/brands/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "brands",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Brand",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "url": {
+                  "raw": "{{base_url}}/api/brands/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "brands",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Models",
+          "item": [
+            {
+              "name": "List Models",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/models",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "models"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Model",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/models/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "models",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create Model",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"ThinkPad X1 Carbon\",\"brand_id\":3}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/models",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "models"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Model",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"ThinkPad X1 Carbon\",\"brand_id\":3}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/models/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "models",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Model",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "url": {
+                  "raw": "{{base_url}}/api/models/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "models",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Equipment Types",
+          "item": [
+            {
+              "name": "List Equipment Types",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/equipment-types",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "equipment-types"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Equipment Type",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/equipment-types/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "equipment-types",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create Equipment Type",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"Server\",\"description\":\"Server hardware\"}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/equipment-types",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "equipment-types"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Equipment Type",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"Server\",\"description\":\"Server hardware\"}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/equipment-types/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "equipment-types",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Equipment Type",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "url": {
+                  "raw": "{{base_url}}/api/equipment-types/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "equipment-types",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Operating Systems",
+          "item": [
+            {
+              "name": "List Operating Systems",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/operating-systems",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "operating-systems"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Operating System",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/operating-systems/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "operating-systems",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create Operating System",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"Windows 11\",\"version\":\"11.0\"}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/operating-systems",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "operating-systems"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Operating System",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"Windows 11\",\"version\":\"11.0\"}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/operating-systems/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "operating-systems",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Operating System",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "url": {
+                  "raw": "{{base_url}}/api/operating-systems/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "operating-systems",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Software Categories",
+          "item": [
+            {
+              "name": "List Software Categorys",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/software-categories",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "software-categories"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Software Category",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/software-categories/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "software-categories",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create Software Category",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"Productivity\",\"description\":\"Productivity software\"}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/software-categories",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "software-categories"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Software Category",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"Productivity\",\"description\":\"Productivity software\"}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/software-categories/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "software-categories",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Software Category",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "url": {
+                  "raw": "{{base_url}}/api/software-categories/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "software-categories",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Software",
+          "item": [
+            {
+              "name": "List Softwares",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/software",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "software"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Software",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/software/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "software",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create Software",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"Microsoft Office\",\"version\":\"2021\",\"software_category_id\":1}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/software",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "software"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Software",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"Microsoft Office\",\"version\":\"2021\",\"software_category_id\":1}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/software/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "software",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Software",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "url": {
+                  "raw": "{{base_url}}/api/software/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "software",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Equipment",
+          "item": [
+            {
+              "name": "List Equipments",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/equipment",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "equipment"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Equipment",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/equipment/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "equipment",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create Equipment",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"Laptop-001\",\"description\":\"Dell Latitude\",\"serial_number\":\"SN123\",\"equipment_type_id\":1,\"model_id\":1,\"production_date\":\"2024-01-01\",\"ip_v4\":\"192.168.1.1\",\"ip_v6\":\"::1\",\"mac_address\":\"00:11:22:33:44:55\",\"operating_system_id\":1,\"location_id\":1,\"proccessors\":\"Intel i7\",\"country_of_region\":1,\"user_id\":1,\"warrantly_start_date\":\"2024-01-01\",\"warrantly_end_date\":\"2027-01-01\",\"supplier_id\":1}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/equipment",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "equipment"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Equipment",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"Laptop-001\",\"description\":\"Dell Latitude\",\"serial_number\":\"SN123\",\"equipment_type_id\":1,\"model_id\":1,\"production_date\":\"2024-01-01\",\"ip_v4\":\"192.168.1.1\",\"ip_v6\":\"::1\",\"mac_address\":\"00:11:22:33:44:55\",\"operating_system_id\":1,\"location_id\":1,\"proccessors\":\"Intel i7\",\"country_of_region\":1,\"user_id\":1,\"warrantly_start_date\":\"2024-01-01\",\"warrantly_end_date\":\"2027-01-01\",\"supplier_id\":1}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/equipment/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "equipment",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Equipment",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "url": {
+                  "raw": "{{base_url}}/api/equipment/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "equipment",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Equipment Software",
+              "item": [
+                {
+                  "name": "List Equipment Software",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{token}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "url": {
+                      "raw": "{{base_url}}/api/equipment/:equipmentId/software",
+                      "host": [
+                        "{{base_url}}"
+                      ],
+                      "path": [
+                        "api",
+                        "equipment",
+                        ":equipmentId",
+                        "software"
+                      ],
+                      "variable": [
+                        {
+                          "key": "equipmentId",
+                          "value": "1",
+                          "type": ""
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "name": "Link Software to Equipment",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{token}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"software_id\":1,\"install_date\":\"2024-01-01\"}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/api/equipment/:equipmentId/software",
+                      "host": [
+                        "{{base_url}}"
+                      ],
+                      "path": [
+                        "api",
+                        "equipment",
+                        ":equipmentId",
+                        "software"
+                      ],
+                      "variable": [
+                        {
+                          "key": "equipmentId",
+                          "value": "1",
+                          "type": ""
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "name": "Update Equipment Software",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{token}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"install_date\":\"2024-01-15\"}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/api/equipment/:equipmentId/software/:softwareId",
+                      "host": [
+                        "{{base_url}}"
+                      ],
+                      "path": [
+                        "api",
+                        "equipment",
+                        ":equipmentId",
+                        "software",
+                        ":softwareId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "equipmentId",
+                          "value": "1",
+                          "type": ""
+                        },
+                        {
+                          "key": "softwareId",
+                          "value": "1",
+                          "type": ""
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "name": "Unlink Software from Equipment",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{token}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "DELETE",
+                    "url": {
+                      "raw": "{{base_url}}/api/equipment/:equipmentId/software/:softwareId",
+                      "host": [
+                        "{{base_url}}"
+                      ],
+                      "path": [
+                        "api",
+                        "equipment",
+                        ":equipmentId",
+                        "software",
+                        ":softwareId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "equipmentId",
+                          "value": "1",
+                          "type": ""
+                        },
+                        {
+                          "key": "softwareId",
+                          "value": "1",
+                          "type": ""
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Equipment Help Desk",
+              "item": [
+                {
+                  "name": "List Equipment Help Desk Links",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{token}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "url": {
+                      "raw": "{{base_url}}/api/equipment/:equipmentId/help-desk",
+                      "host": [
+                        "{{base_url}}"
+                      ],
+                      "path": [
+                        "api",
+                        "equipment",
+                        ":equipmentId",
+                        "help-desk"
+                      ],
+                      "variable": [
+                        {
+                          "key": "equipmentId",
+                          "value": "1",
+                          "type": ""
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "name": "Link Equipment to Help Desk",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{token}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"help_desk_id\":1}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/api/equipment/:equipmentId/help-desk",
+                      "host": [
+                        "{{base_url}}"
+                      ],
+                      "path": [
+                        "api",
+                        "equipment",
+                        ":equipmentId",
+                        "help-desk"
+                      ],
+                      "variable": [
+                        {
+                          "key": "equipmentId",
+                          "value": "1",
+                          "type": ""
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "name": "Unlink Equipment from Help Desk",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{token}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "DELETE",
+                    "url": {
+                      "raw": "{{base_url}}/api/equipment/:equipmentId/help-desk/:helpDeskId",
+                      "host": [
+                        "{{base_url}}"
+                      ],
+                      "path": [
+                        "api",
+                        "equipment",
+                        ":equipmentId",
+                        "help-desk",
+                        ":helpDeskId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "equipmentId",
+                          "value": "1",
+                          "type": ""
+                        },
+                        {
+                          "key": "helpDeskId",
+                          "value": "1",
+                          "type": ""
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Equipment User History",
+              "item": [
+                {
+                  "name": "List Equipment User History",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{token}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "url": {
+                      "raw": "{{base_url}}/api/equipment/:equipmentId/user-history",
+                      "host": [
+                        "{{base_url}}"
+                      ],
+                      "path": [
+                        "api",
+                        "equipment",
+                        ":equipmentId",
+                        "user-history"
+                      ],
+                      "variable": [
+                        {
+                          "key": "equipmentId",
+                          "value": "1",
+                          "type": ""
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "name": "Create Equipment User History",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{token}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"user_id\":1,\"start_date\":\"2024-01-01\",\"end_date\":\"2024-12-31\"}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/api/equipment/:equipmentId/user-history",
+                      "host": [
+                        "{{base_url}}"
+                      ],
+                      "path": [
+                        "api",
+                        "equipment",
+                        ":equipmentId",
+                        "user-history"
+                      ],
+                      "variable": [
+                        {
+                          "key": "equipmentId",
+                          "value": "1",
+                          "type": ""
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "name": "Update Equipment User History",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{token}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"end_date\":\"2024-06-30\"}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/api/equipment/:equipmentId/user-history/:userId/:startDate",
+                      "host": [
+                        "{{base_url}}"
+                      ],
+                      "path": [
+                        "api",
+                        "equipment",
+                        ":equipmentId",
+                        "user-history",
+                        ":userId",
+                        ":startDate"
+                      ],
+                      "variable": [
+                        {
+                          "key": "equipmentId",
+                          "value": "1",
+                          "type": ""
+                        },
+                        {
+                          "key": "userId",
+                          "value": "1",
+                          "type": ""
+                        },
+                        {
+                          "key": "startDate",
+                          "value": "2024-01-01",
+                          "type": ""
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "name": "Delete Equipment User History",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{token}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "DELETE",
+                    "url": {
+                      "raw": "{{base_url}}/api/equipment/:equipmentId/user-history/:userId/:startDate",
+                      "host": [
+                        "{{base_url}}"
+                      ],
+                      "path": [
+                        "api",
+                        "equipment",
+                        ":equipmentId",
+                        "user-history",
+                        ":userId",
+                        ":startDate"
+                      ],
+                      "variable": [
+                        {
+                          "key": "equipmentId",
+                          "value": "1",
+                          "type": ""
+                        },
+                        {
+                          "key": "userId",
+                          "value": "1",
+                          "type": ""
+                        },
+                        {
+                          "key": "startDate",
+                          "value": "2024-01-01",
+                          "type": ""
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Documents",
+          "item": [
+            {
+              "name": "List Documents",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/documents",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "documents"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Document",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/documents/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "documents",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create Document",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"Warranty.pdf\",\"document_size\":1024,\"document_type\":\"pdf\",\"equipment_id\":1}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/documents",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "documents"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Document",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"Warranty.pdf\",\"document_size\":1024,\"document_type\":\"pdf\",\"equipment_id\":1}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/documents/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "documents",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Document",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "url": {
+                  "raw": "{{base_url}}/api/documents/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "documents",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Maintenance",
+          "item": [
+            {
+              "name": "List Maintenance Records",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/maintenance",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "maintenance"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Maintenance Record",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/maintenance/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "maintenance",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create Maintenance Record",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"equipment_id\":1,\"maintenance_date\":\"2024-01-15\",\"description\":\"Regular maintenance\",\"cost\":100.50}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/maintenance",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "maintenance"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Maintenance Record",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"equipment_id\":1,\"maintenance_date\":\"2024-01-15\",\"description\":\"Regular maintenance\",\"cost\":100.50}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/maintenance/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "maintenance",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Maintenance Record",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "url": {
+                  "raw": "{{base_url}}/api/maintenance/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "maintenance",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Geography",
+      "item": [
+        {
+          "name": "Countries",
+          "item": [
+            {
+              "name": "List Countrys",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/countries",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "countries"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Country",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/countries/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "countries",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create Country",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"United States\",\"code\":\"US\"}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/countries",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "countries"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Country",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"United States\",\"code\":\"US\"}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/countries/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "countries",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Country",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "url": {
+                  "raw": "{{base_url}}/api/countries/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "countries",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Cities",
+          "item": [
+            {
+              "name": "List Citys",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/cities",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "cities"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get City",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/cities/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "cities",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create City",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"New York\",\"country_id\":1}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/cities",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "cities"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update City",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"New York\",\"country_id\":1}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/cities/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "cities",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete City",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "url": {
+                  "raw": "{{base_url}}/api/cities/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "cities",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Locations",
+          "item": [
+            {
+              "name": "List Locations",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/locations",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "locations"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Location",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/locations/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "locations",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create Location",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"Head Office\",\"address\":\"123 Main St\",\"city_id\":1}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/locations",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "locations"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Location",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"Head Office\",\"address\":\"123 Main St\",\"city_id\":1}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/locations/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "locations",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Location",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "url": {
+                  "raw": "{{base_url}}/api/locations/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "locations",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Contacts",
+          "item": [
+            {
+              "name": "List Contacts",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/contacts",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "contacts"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Contact",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/contacts/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "contacts",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create Contact",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"ABC Corp\",\"email\":\"contact@abc.com\",\"mobile_number\":\"+1234567890\",\"country_id\":1}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/contacts",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "contacts"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Contact",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"ABC Corp\",\"email\":\"contact@abc.com\",\"mobile_number\":\"+1234567890\",\"country_id\":1}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/contacts/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "contacts",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Contact",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "url": {
+                  "raw": "{{base_url}}/api/contacts/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "contacts",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Help Desk",
+      "item": [
+        {
+          "name": "Tickets",
+          "item": [
+            {
+              "name": "List Help Desk Tickets",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/help-desk",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "help-desk"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Help Desk Ticket",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/help-desk/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "help-desk",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create Help Desk Ticket",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"Laptop won't start\",\"create_date\":\"2024-01-15\",\"help_desk_type_id\":1,\"portal_user_id\":1,\"description\":\"Black screen on boot\",\"state\":\"open\"}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/help-desk",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "help-desk"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Help Desk Ticket",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"Laptop won't start\",\"create_date\":\"2024-01-15\",\"help_desk_type_id\":1,\"portal_user_id\":1,\"description\":\"Black screen on boot\",\"state\":\"open\"}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/help-desk/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "help-desk",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Help Desk Ticket",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "url": {
+                  "raw": "{{base_url}}/api/help-desk/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "help-desk",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Participants",
+              "item": [
+                {
+                  "name": "List Help Desk Participants",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{token}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "url": {
+                      "raw": "{{base_url}}/api/help-desk/:helpDeskId/participants",
+                      "host": [
+                        "{{base_url}}"
+                      ],
+                      "path": [
+                        "api",
+                        "help-desk",
+                        ":helpDeskId",
+                        "participants"
+                      ],
+                      "variable": [
+                        {
+                          "key": "helpDeskId",
+                          "value": "1",
+                          "type": ""
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "name": "Add Help Desk Participant",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{token}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"user_id\":1}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/api/help-desk/:helpDeskId/participants",
+                      "host": [
+                        "{{base_url}}"
+                      ],
+                      "path": [
+                        "api",
+                        "help-desk",
+                        ":helpDeskId",
+                        "participants"
+                      ],
+                      "variable": [
+                        {
+                          "key": "helpDeskId",
+                          "value": "1",
+                          "type": ""
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "name": "Remove Help Desk Participant",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{token}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "DELETE",
+                    "url": {
+                      "raw": "{{base_url}}/api/help-desk/:helpDeskId/participants/:userId",
+                      "host": [
+                        "{{base_url}}"
+                      ],
+                      "path": [
+                        "api",
+                        "help-desk",
+                        ":helpDeskId",
+                        "participants",
+                        ":userId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "helpDeskId",
+                          "value": "1",
+                          "type": ""
+                        },
+                        {
+                          "key": "userId",
+                          "value": "1",
+                          "type": ""
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Ratings",
+          "item": [
+            {
+              "name": "List Help Desk Ratings",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/help-desk/ratings",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "help-desk",
+                    "ratings"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Help Desk Rating",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/help-desk/ratings/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "help-desk",
+                    "ratings",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create Help Desk Rating",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"help_desk_id\":1,\"rating\":5,\"comment\":\"Excellent service\"}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/help-desk/ratings",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "help-desk",
+                    "ratings"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Help Desk Rating",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"help_desk_id\":1,\"rating\":5,\"comment\":\"Excellent service\"}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/help-desk/ratings/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "help-desk",
+                    "ratings",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Help Desk Rating",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "url": {
+                  "raw": "{{base_url}}/api/help-desk/ratings/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "help-desk",
+                    "ratings",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Transactions",
+          "item": [
+            {
+              "name": "List Help Desk Transactions",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/help-desk/transactions",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "help-desk",
+                    "transactions"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Help Desk Transaction",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/help-desk/transactions/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "help-desk",
+                    "transactions",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create Help Desk Transaction",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"help_desk_id\":1,\"transaction_type_id\":1,\"description\":\"Initial response\",\"date\":\"2024-01-15\"}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/help-desk/transactions",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "help-desk",
+                    "transactions"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Help Desk Transaction",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"help_desk_id\":1,\"transaction_type_id\":1,\"description\":\"Initial response\",\"date\":\"2024-01-15\"}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/help-desk/transactions/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "help-desk",
+                    "transactions",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Help Desk Transaction",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "url": {
+                  "raw": "{{base_url}}/api/help-desk/transactions/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "help-desk",
+                    "transactions",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Transaction Users",
+              "item": [
+                {
+                  "name": "List Transaction Users",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{token}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "url": {
+                      "raw": "{{base_url}}/api/help-desk/transactions/:transactionId/users",
+                      "host": [
+                        "{{base_url}}"
+                      ],
+                      "path": [
+                        "api",
+                        "help-desk",
+                        "transactions",
+                        ":transactionId",
+                        "users"
+                      ],
+                      "variable": [
+                        {
+                          "key": "transactionId",
+                          "value": "1",
+                          "type": ""
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "name": "Add Transaction User",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{token}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"user_id\":1}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/api/help-desk/transactions/:transactionId/users",
+                      "host": [
+                        "{{base_url}}"
+                      ],
+                      "path": [
+                        "api",
+                        "help-desk",
+                        "transactions",
+                        ":transactionId",
+                        "users"
+                      ],
+                      "variable": [
+                        {
+                          "key": "transactionId",
+                          "value": "1",
+                          "type": ""
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "name": "Remove Transaction User",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{token}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "DELETE",
+                    "url": {
+                      "raw": "{{base_url}}/api/help-desk/transactions/:transactionId/users/:userId",
+                      "host": [
+                        "{{base_url}}"
+                      ],
+                      "path": [
+                        "api",
+                        "help-desk",
+                        "transactions",
+                        ":transactionId",
+                        "users",
+                        ":userId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "transactionId",
+                          "value": "1",
+                          "type": ""
+                        },
+                        {
+                          "key": "userId",
+                          "value": "1",
+                          "type": ""
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Teams",
+          "item": [
+            {
+              "name": "List Help Desk Teams",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/help-desk/teams",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "help-desk",
+                    "teams"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Help Desk Team",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/help-desk/teams/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "help-desk",
+                    "teams",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create Help Desk Team",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"IT Support\",\"description\":\"Primary IT support team\",\"manager_id\":1,\"is_active\":true}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/help-desk/teams",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "help-desk",
+                    "teams"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Help Desk Team",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"IT Support\",\"description\":\"Primary IT support team\",\"manager_id\":1,\"is_active\":true}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/help-desk/teams/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "help-desk",
+                    "teams",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Help Desk Team",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "url": {
+                  "raw": "{{base_url}}/api/help-desk/teams/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "help-desk",
+                    "teams",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Team Members",
+              "item": [
+                {
+                  "name": "List Team Members",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{token}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "url": {
+                      "raw": "{{base_url}}/api/help-desk/teams/:teamId/members",
+                      "host": [
+                        "{{base_url}}"
+                      ],
+                      "path": [
+                        "api",
+                        "help-desk",
+                        "teams",
+                        ":teamId",
+                        "members"
+                      ],
+                      "variable": [
+                        {
+                          "key": "teamId",
+                          "value": "1",
+                          "type": ""
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "name": "Add Team Member",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{token}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"user_id\":1}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/api/help-desk/teams/:teamId/members",
+                      "host": [
+                        "{{base_url}}"
+                      ],
+                      "path": [
+                        "api",
+                        "help-desk",
+                        "teams",
+                        ":teamId",
+                        "members"
+                      ],
+                      "variable": [
+                        {
+                          "key": "teamId",
+                          "value": "1",
+                          "type": ""
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "name": "Remove Team Member",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{token}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "DELETE",
+                    "url": {
+                      "raw": "{{base_url}}/api/help-desk/teams/:teamId/members/:userId",
+                      "host": [
+                        "{{base_url}}"
+                      ],
+                      "path": [
+                        "api",
+                        "help-desk",
+                        "teams",
+                        ":teamId",
+                        "members",
+                        ":userId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "teamId",
+                          "value": "1",
+                          "type": ""
+                        },
+                        {
+                          "key": "userId",
+                          "value": "1",
+                          "type": ""
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Transaction Types",
+          "item": [
+            {
+              "name": "List Help Desk Transaction Types",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/help-desk/transaction-types",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "help-desk",
+                    "transaction-types"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Help Desk Transaction Type",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/help-desk/transaction-types/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "help-desk",
+                    "transaction-types",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create Help Desk Transaction Type",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"Response\",\"description\":\"Initial response to ticket\"}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/help-desk/transaction-types",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "help-desk",
+                    "transaction-types"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Help Desk Transaction Type",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"Response\",\"description\":\"Initial response to ticket\"}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/help-desk/transaction-types/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "help-desk",
+                    "transaction-types",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Help Desk Transaction Type",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "url": {
+                  "raw": "{{base_url}}/api/help-desk/transaction-types/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "help-desk",
+                    "transaction-types",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Navigation",
+      "item": [
+        {
+          "name": "Menus",
+          "item": [
+            {
+              "name": "List Menus",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/menus",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "menus"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Menu",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/api/menus/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "menus",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create Menu",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"Dashboard\",\"path\":\"/dashboard\",\"icon\":\"home\",\"parent_id\":null,\"order\":1}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/menus",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "menus"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Menu",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"Dashboard\",\"path\":\"/dashboard\",\"icon\":\"home\",\"parent_id\":null,\"order\":1}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/menus/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "menus",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Menu",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "url": {
+                  "raw": "{{base_url}}/api/menus/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "menus",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1",
+                      "type": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Menu Roles",
+              "item": [
+                {
+                  "name": "List Menu Roles",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{token}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "url": {
+                      "raw": "{{base_url}}/api/menus/:menuId/roles",
+                      "host": [
+                        "{{base_url}}"
+                      ],
+                      "path": [
+                        "api",
+                        "menus",
+                        ":menuId",
+                        "roles"
+                      ],
+                      "variable": [
+                        {
+                          "key": "menuId",
+                          "value": "1",
+                          "type": ""
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "name": "Add Menu Role",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{token}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\"role_id\":1}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/api/menus/:menuId/roles",
+                      "host": [
+                        "{{base_url}}"
+                      ],
+                      "path": [
+                        "api",
+                        "menus",
+                        ":menuId",
+                        "roles"
+                      ],
+                      "variable": [
+                        {
+                          "key": "menuId",
+                          "value": "1",
+                          "type": ""
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "name": "Remove Menu Role",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{token}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "DELETE",
+                    "url": {
+                      "raw": "{{base_url}}/api/menus/:menuId/roles/:roleId",
+                      "host": [
+                        "{{base_url}}"
+                      ],
+                      "path": [
+                        "api",
+                        "menus",
+                        ":menuId",
+                        "roles",
+                        ":roleId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "menuId",
+                          "value": "1",
+                          "type": ""
+                        },
+                        {
+                          "key": "roleId",
+                          "value": "1",
+                          "type": ""
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}

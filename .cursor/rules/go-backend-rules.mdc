@@ -1,0 +1,25 @@
+---
+alwaysApply: true
+---
+When acting on this workspace, follow these guard rails:
+
+- Language: Go 1.25.3. Keep code idiomatic, module-driven, and backend focused.
+- Project structure:
+  - `main.go` boots the server, wires config, DB, routes, middleware.
+  - `config/` loads environment settings, secrets, database connection.
+  - `controllers/` exposes HTTP handlers (admin, auth, permission, role, user, DB init); never bypass services.
+  - `middleware/` holds CORS, JWT auth, role/permission guards; keep functions stateless and reusable.
+  - `models/` defines all GORM entities (User, Role, Permission, Nationality, etc.); migrations and schema live here.
+  - `routes/` registers chi route groups per domain (`routes.go` plus module-specific files).
+  - `services/` encapsulates domain logic (e.g., `user_service.go`); only services interact with repositories/models directly.
+  - `utils/` contains shared helpers (JWT, crypto, pagination); avoid domain logic here.
+  - `extra/` stores SQL seeds (e.g., `AddToPermissionTable.sql`) and other bootstrap data.
+- Database:
+  - Use the the public schema on database ITaaS from the "postgres" inside mcp servers if I didn't tell others. 
+- Large-project conventions:
+  - Prefer small, composable packages; document exported types/functions.
+  - Centralize validation, error responses, and logging helpers; reuse across modules.
+  - Keep database access in services; controllers should translate to/from HTTP only.
+  - Add integration/unit tests alongside new services and handlers when feasible.
+  - Update README/config docs whenever adding environment variables or feature flags.
+  - For new platform components, create dedicated service + controller + route files and list cross-module dependencies in comments.
