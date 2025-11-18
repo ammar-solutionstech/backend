@@ -14,14 +14,14 @@ type HelpDesk struct {
 	ResolveDate    time.Time             `gorm:"column:resolve_date;type:date;not null" json:"resolve_date"`
 	ParentID       *int                  `gorm:"column:help_desk_id" json:"parent_id,omitempty"`
 	ProjectID      *int                  `gorm:"column:project_id" json:"project_id,omitempty"`
-	Type           HelpDeskType          `gorm:"foreignKey:ID;references:HelpDeskTypeID" json:"type,omitempty"`
-	PortalUser     User                  `gorm:"foreignKey:ID;references:PortalUserID" json:"portal_user,omitempty"`
-	Parent         *HelpDesk             `gorm:"foreignKey:ID;references:ParentID" json:"parent,omitempty"`
-	Documents      []Document            `gorm:"foreignKey:ID;references:HelpDeskID" json:"documents,omitempty"`
-	Equipments     []Equipment           `gorm:"many2many:equipment_help_desk" json:"equipments,omitempty"`
-	Participants   []User                `gorm:"many2many:user_help_desk" json:"participants,omitempty"`
-	Transactions   []HelpDeskTransaction `gorm:"foreignKey:ID;references:HelpDeskID" json:"transactions,omitempty"`
-	Ratings        []HelpDeskRating      `gorm:"foreignKey:ID;references:HelpDeskID" json:"ratings,omitempty"`
+	Type           HelpDeskType          `gorm:"foreignKey:HelpDeskTypeID;references:ID" json:"type,omitempty"`
+	PortalUser     User                  `gorm:"foreignKey:PortalUserID;references:ID" json:"portal_user,omitempty"`
+	Parent         *HelpDesk             `gorm:"foreignKey:ParentID;references:ID" json:"parent,omitempty"`
+	Documents      []Document            `gorm:"foreignKey:HelpDeskID;references:ID" json:"documents,omitempty"`
+	Equipments     []Equipment           `gorm:"many2many:equipment_help_desk;foreignKey:ID;joinForeignKey:HelpDeskID;References:ID;joinReferences:EquipmentID" json:"equipments,omitempty"`
+	Participants   []User                `gorm:"many2many:user_help_desk;foreignKey:ID;joinForeignKey:HelpDeskID;References:ID;joinReferences:UserID" json:"participants,omitempty"`
+	Transactions   []HelpDeskTransaction `gorm:"foreignKey:HelpDeskID;references:ID" json:"transactions,omitempty"`
+	Ratings        []HelpDeskRating      `gorm:"foreignKey:HelpDeskID;references:ID" json:"ratings,omitempty"`
 }
 
 // TableName overrides the default.

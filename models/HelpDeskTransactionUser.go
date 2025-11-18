@@ -8,5 +8,5 @@ type HelpDeskTransactionUser struct {
 
 // TableName overrides default.
 func (HelpDeskTransactionUser) TableName() string {
-	return `public."Help_desk_transaction_user"`
+	return `public."help_desk_transaction_users"`
 }

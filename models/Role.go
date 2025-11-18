@@ -4,8 +4,8 @@ type Role struct {
 	ID          int          `gorm:"column:id;primaryKey;autoIncrement" json:"id"`
 	Name        string       `gorm:"column:name;type:varchar(255);not null" json:"name"`
 	Description *string      `gorm:"column:description;type:text" json:"description,omitempty"`
-	Permissions []Permission `gorm:"many2many:role_permission;joinForeignKey:RoleID;joinReferences:PermissionID" json:"permissions,omitempty"`
-	Users       []User       `gorm:"many2many:user_role;joinForeignKey:RoleID;joinReferences:UserID" json:"users,omitempty"`
+	Permissions []Permission `gorm:"many2many:role_permission;foreignKey:ID;joinForeignKey:RoleID;References:ID;joinReferences:PermissionID" json:"permissions,omitempty"`
+	Users       []User       `gorm:"many2many:user_role;foreignKey:ID;joinForeignKey:RoleID;References:ID;joinReferences:UserID" json:"users,omitempty"`
 }
 
 func (Role) TableName() string {

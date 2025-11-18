@@ -7,7 +7,7 @@ type HelpDeskTransaction struct {
 	ID                int             `gorm:"column:id;primaryKey;autoIncrement" json:"id"`
 	Name              string          `gorm:"column:name;type:char;not null" json:"name"`
 	TransactionTypeID int             `gorm:"column:transaction_type_id;not null" json:"transaction_type_id"`
-	DateTime          time.Time       `gorm:"column:date_time;type:time;not null" json:"date_time"`
+	DateTime          time.Time       `gorm:"column:date_time;type:date;not null" json:"date_time"`
 	TimeSpent         float64         `gorm:"column:time;not null" json:"time"`
 	HelpDeskID        int             `gorm:"column:help_desk_id;not null" json:"help_desk_id"`
 	Type              TransactionType `gorm:"foreignKey:TransactionTypeID;references:ID" json:"type,omitempty"`

@@ -19,12 +19,12 @@ type User struct {
 	IDType          *int                  `gorm:"column:id_type" json:"id_type,omitempty"`
 	ContactID       *int                  `gorm:"column:contact_id" json:"contact_id,omitempty"`
 	Active          *int                  `gorm:"column:active" json:"active,omitempty"`
-	Roles           []Role                `gorm:"many2many:user_role" json:"roles,omitempty"`
-	Permissions     []Permission          `gorm:"many2many:user_special_permission" json:"permissions,omitempty"`
+	Roles           []Role                `gorm:"many2many:user_role;foreignKey:ID;joinForeignKey:UserID;References:ID;joinReferences:RoleID" json:"roles,omitempty"`
+	Permissions     []Permission          `gorm:"many2many:user_special_permission;foreignKey:ID;joinForeignKey:UserID;References:ID;joinReferences:PermissionID" json:"permissions,omitempty"`
 	Teams           []Team                `gorm:"many2many:team_members;foreignKey:ID;joinForeignKey:UserID;References:ID;joinReferences:HelpDeskTeamID" json:"teams,omitempty"`
 	Nationality     *Country              `gorm:"foreignKey:NationalityID;references:ID" json:"nationality,omitempty"`
 	Contact         *Contact              `gorm:"foreignKey:ContactID;references:ID" json:"contact,omitempty"`
-	HelpDeskTickets []HelpDesk            `gorm:"many2many:user_help_desk" json:"help_desk_tickets,omitempty"`
+	HelpDeskTickets []HelpDesk            `gorm:"many2many:user_help_desk;foreignKey:ID;joinForeignKey:UserID;References:ID;joinReferences:HelpDeskID" json:"help_desk_tickets,omitempty"`
 	Transactions    []HelpDeskTransaction `gorm:"many2many:Help_desk_transaction_user;foreignKey:ID;joinForeignKey:UserID;References:ID;joinReferences:TransactionID" json:"transactions,omitempty"`
 }
 

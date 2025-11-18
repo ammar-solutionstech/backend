@@ -31,8 +31,8 @@ type Equipment struct {
 	Supplier           Contact         `gorm:"foreignKey:SupplierID;references:ID" json:"supplier,omitempty"`
 	CountryOfOriginRef Country         `gorm:"foreignKey:CountryOfRegion;references:ID" json:"country_of_origin,omitempty"`
 	Documents          []Document      `gorm:"foreignKey:EquipmentID" json:"documents,omitempty"`
-	Softwares          []Software      `gorm:"many2many:Equipment_Software" json:"softwares,omitempty"`
-	HelpDeskTickets    []HelpDesk      `gorm:"many2many:equipment_help_desk" json:"help_desk_tickets,omitempty"`
+	Softwares          []Software      `gorm:"many2many:Equipment_Software;foreignKey:ID;joinForeignKey:EquipmentID;References:ID;joinReferences:SoftwareID" json:"softwares,omitempty"`
+	HelpDeskTickets    []HelpDesk      `gorm:"many2many:equipment_help_desk;foreignKey:ID;joinForeignKey:EquipmentID;References:ID;joinReferences:HelpDeskID" json:"help_desk_tickets,omitempty"`
 }
 
 // TableName overrides the schema-qualified name.
