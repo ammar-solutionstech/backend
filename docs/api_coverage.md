@@ -177,5 +177,3 @@
 +- Generic CRUD is delivered by `controllers/resource_controller.go` and `services/generic_service.go`, with concrete registrations defined in the `routes` package.
 +- Relationship endpoints rely on dedicated services (`services/equipment_service.go`, `services/helpdesk_service.go`, `services/navigation_service.go`) to keep database writes centralized.
 +- Legacy controllers (User, Role, Permission) continue to operate but can be migrated to the generic stack later for consistency.
-
-
